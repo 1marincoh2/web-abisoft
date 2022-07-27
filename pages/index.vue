@@ -161,7 +161,7 @@ const index = defineComponent({
         var hoy = new Date()
         var cumpleanos = new Date(v)
         var edad = hoy.getFullYear() - cumpleanos.getFullYear()
-        console.log(edad)
+
         return edad >= 18 || 'Debes Ser Mayor a 18 años'
       },
     ]
@@ -225,7 +225,7 @@ const index = defineComponent({
     const getUsuarios = async () => {
       try {
         const response = await userService.userGet()
-        console.log(response.data)
+
         dataPerson.value = response
       } catch (e) {}
     }
@@ -240,12 +240,7 @@ const index = defineComponent({
           dataPerson.value.data.push(service)
           close()
         }
-      } catch (response) {
-        //
-        console.log('error', response)
-      }
-
-      console.log('estoy agregando')
+      } catch (response) {}
     }
     const actualizar = async () => {
       try {
@@ -264,16 +259,12 @@ const index = defineComponent({
           close()
         }
       } catch (response) {
-        // aqui se atrapa el error
         console.log('error', response)
       }
-
-      console.log('estoy actualizando')
     }
 
     const deletePerson = async (item: any) => {
       try {
-        console.log(item)
         const serviceDelete = await userService.userDelete(item)
         const index = dataPerson.value.data.findIndex(
           (pers: any) => pers._id === item._id
@@ -281,9 +272,7 @@ const index = defineComponent({
         if (index > -1) {
           dataPerson.value.data.splice(index, 1)
         }
-        console.log('estoy eliminando la posicion ' + index, item)
       } catch (response) {
-        //
         console.log('error', response)
       }
     }
