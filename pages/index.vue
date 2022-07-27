@@ -233,11 +233,13 @@ const index = defineComponent({
       try {
         // @ts-ignore
         if (form.value.validate()) {
+          // @ts-ignore
+          delete DataSend.value._id
           const service = await userService.userPost(DataSend.value)
           // @ts-ignore
           dataPerson.value.data.push(service)
+          close()
         }
-        close()
       } catch (response) {
         //
         console.log('error', response)
@@ -271,13 +273,15 @@ const index = defineComponent({
 
     const deletePerson = async (item: any) => {
       try {
-        // await userService.userDelete(item)
+        console.log(item)
+        const serviceDelete = await userService.userDelete(item)
         const index = dataPerson.value.data.findIndex(
           (pers: any) => pers._id === item._id
         )
         if (index > -1) {
           dataPerson.value.data.splice(index, 1)
         }
+        console.log('estoy eliminando la posicion ' + index, item)
       } catch (response) {
         //
         console.log('error', response)
