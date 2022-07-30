@@ -253,7 +253,7 @@ const index = defineComponent({
           )
           if (findIndex1 > -1) {
             // @ts-ignore
-            state.dataPerson.splice(findIndex1, 1, serviceUpdate)
+            dataPerson.value.splice(findIndex1, 1, serviceUpdate)
           }
 
           close()
